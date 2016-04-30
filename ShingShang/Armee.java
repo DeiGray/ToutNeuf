@@ -122,7 +122,7 @@ public class Armee {
 			return this.bushis.remove(bushi);
 		}
 		catch(NullPointerException e){
-			console.afficherErreur("Vous tentez de supprimé un bushi inexistant."+e.getMessage());
+			console.afficherErreur("Vous tentez de supprimer un bushi inexistant."+e.getMessage());
 			return false;
 		}
 	}

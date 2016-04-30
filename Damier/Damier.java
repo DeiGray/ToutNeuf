@@ -8,6 +8,7 @@ import ShingShang.Joueur;
 import java.lang.NullPointerException;
 
 import Affichage.InterfaceShingShang;
+import Entitees.Bushi;
 import Entitees.Dragon;
 /**
  * Symbolise le damier contenant des cases pour jouer au Jeu.
@@ -62,6 +63,10 @@ public class Damier implements PositionElement{
 		}
 	}
 	
+	public InterfaceShingShang getConsole() {
+		return console;
+	}
+
 	public void attribuerPortail(Joueur joueur){
 		for(int i=0;i<dimension;i++){
 			for(int j=0;j<dimension;j++){
@@ -241,7 +246,7 @@ public class Damier implements PositionElement{
 			for(int j=0;j<this.getDimension();j++){
 				if(this.getCase(new Coordonnees(j,i)) instanceof Portail)
 				{
-					Portail portail = (Portail) this.getCase(new Coordonnees(j,i));
+					Portail portail = (Portail) cases[i][j];
 					if(!portail.estOccupee())
 						compteurPortailOccuppee++;
 							
@@ -249,6 +254,21 @@ public class Damier implements PositionElement{
 			}
 		}
 		return compteurPortailOccuppee;
+	}
+	
+	public Case getCase(Bushi b){
+		for(int i=0;i<this.dimension;i++){
+			for(int j=0;j<this.dimension;j++){
+				if(cases[i][j] != null){
+					if(!cases[i][j].estVide()){
+						if(cases[i][j].getBushi().getIdentite().equals(b.getIdentite())){
+							return cases[i][j];
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 	
 	/**

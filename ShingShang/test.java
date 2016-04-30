@@ -3,12 +3,14 @@ package ShingShang;
 import java.util.LinkedList;
 
 import Affichage.*;
-
+import Damier.Coordonnees;
+import Entitees.Dragon;
 
 import java.awt.Color;
 
 
 import Exception.CaseDejaOccuperException;
+import Exception.EnleverBushiCaseException;
 import enigma.console.TextAttributes;
 
 public class test {
@@ -51,6 +53,20 @@ public class test {
 		console.afficher();
 		console.afficher();
 		console.afficherErreur("ERREUR");*/
+		
+		try {
+			partie.getJoueur1().getArmee().supprimeBushi(partie.getDamier().getCase(new Coordonnees(1,0)).enleverBushi());
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (EnleverBushiCaseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		console.ajouteMessage("test suppression\n");
+		console.ajouteMessage("testPion encore qqpart :\ndans le plateau ="+partie.getDamier().getCase(new Coordonnees(1, 0))+"\ndans l'armee = "+partie.getJoueur1().getArmee().getTaille());
+		console.afficher();
 		
 		
 

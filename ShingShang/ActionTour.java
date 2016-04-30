@@ -51,6 +51,8 @@ public abstract class ActionTour{
 		}
 		deplacementIndeterminee = new MouvementImpl(selectionnee,arrivee,d);
 		deplacementDeterminee = deplacementIndeterminee.estDeType();
+		
+		
 
 	}
 	
