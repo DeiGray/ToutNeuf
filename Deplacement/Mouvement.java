@@ -4,6 +4,6 @@ import Entitees.Bushi;
 
 public interface Mouvement {
 
-	public Bushi effectuer();
+	public void effectuer();
 	public boolean estLongueurPossible();
 }

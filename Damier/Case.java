@@ -2,6 +2,7 @@ package Damier;
 
 import Entitees.Bushi;
 import Exception.CaseDejaOccuperException;
+import Exception.EnleverBushiCaseException;
 
 /**
  * Symbolise une case d'un damier pouvant contenir un Bushi
@@ -39,16 +40,15 @@ public class Case {
 	/**
 	 * Enleve et retourne le bushi de la case.
 	 * @return Bushi
+	 * @throws EnleverBushiCaseException 
 	 */
-	public Bushi enleverBushi () {
-		if(!this.estVide())
-		{
-			Bushi tmp = this.occupant;
-			this.occupant = null;
-			return tmp;
-		}
-	else
-		return null;
+	public Bushi enleverBushi () throws EnleverBushiCaseException {
+		if(this.estVide())
+			throw new EnleverBushiCaseException();
+		Bushi tmp = this.occupant;
+		this.occupant = null;
+		return tmp;
+		
 	}
 
 	/**

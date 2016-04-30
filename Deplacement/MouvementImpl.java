@@ -7,6 +7,7 @@ import Damier.Coordonnees;
 import Damier.Damier;
 import Entitees.Bushi;
 import Exception.CaseDejaOccuperException;
+import Exception.EnleverBushiCaseException;
 
 /**
  * 
@@ -72,10 +73,14 @@ public  class MouvementImpl implements Mouvement{
 			return new Glissement(this.selectionnee,this.arrivee,this.d);
 		for (int i= 0;i<listDeBushi.size();i++){
 			bushiSaute = (Bushi) listDeBushi.get(i);
-			if(!bushiSaute.getArmee().getPossesseur().getIdentite().equals(selectionnee.getBushi().getArmee().getPossesseur().getIdentite()))
+			if(this.estBushiEnnemie(bushiSaute))
 				return new SautEnnemie(this.selectionnee,this.arrivee,d);
 		}
 		return new SautAmie(this.selectionnee,this.arrivee,this.d);
+	}
+	
+	public boolean estBushiEnnemie(Bushi b){
+		return !b.getArmee().getPossesseur().getIdentite().equals(selectionnee.getBushi().getArmee().getPossesseur().getIdentite());
 	}
 	
 	/**
@@ -148,15 +153,18 @@ public  class MouvementImpl implements Mouvement{
 		return bushiSautees;
 	}
 
+	
 	@Override
-	public Bushi effectuer() {
+	public void effectuer() {
 		try{
-			this.arrivee.remplir(selectionnee.getBushi());
+			this.arrivee.remplir(selectionnee.enleverBushi());
 		}
 		catch(CaseDejaOccuperException e){
-			
+			d.getConsole().afficherErreur(e.getMessage());
 		}
-		return null;
+		catch(EnleverBushiCaseException e){
+			d.getConsole().afficherErreur(e.getMessage());
+		}
 	}
 	
 }

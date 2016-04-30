@@ -63,4 +63,8 @@ public abstract class Bushi implements Glisser,Sauter{
 	public void setArmee(Armee armee) {
 		this.armee = armee;
 	}
+	
+	public void supprimer() {
+
+	}
 }
